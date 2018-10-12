@@ -21,7 +21,7 @@ public class mainFunction extends Thread4Net {
 		if (!MyUtil.isEmpty(ret)) {
 			String tid = MyUtil.midWord("tid\":\"", "\",\"", ret); 
 			String newId = MyUtil.midWord("new_tid\":", "}", ret);
-			newId = newId.indexOf("true") != -1 ? "3" : "2";
+			newId = newId.indexOf("true") != -1 ? "2" : "3";
 			String con = MyUtil.midWord("confidence\":", "}", ret);
 			con = con == null ? "100" : con;
 
