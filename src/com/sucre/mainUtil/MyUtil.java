@@ -244,7 +244,7 @@ public class MyUtil {
 	 * 追加数据到文�?!文件默认位置为当前目�?
 	 * 
 	 * @param fileName 要保存的文件�?,请带上后�?
-	 * @param data     要追加保存的数据,默认会自动加上换行符!
+	 * @param data     要追加保存的数据,默认会自动加上换行符!.
 	 */
 	public static void outPutData(String fileName, String data) {
 		if ("".equals(data)) {

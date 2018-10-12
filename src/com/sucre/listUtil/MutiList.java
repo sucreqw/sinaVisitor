@@ -14,7 +14,7 @@ import java.util.List;
 //import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * 作为账号,密码,或者其它cookie,vid 存储之用的列表类
+ * 作为账号,密码,或者其它cookie,vid 存储之用的列表类 
  */
 public class MutiList extends ArrayList<String> {
 	private ArrayList<String> myList = null;

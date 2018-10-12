@@ -19,7 +19,7 @@ public class mainFunction extends Thread4Net {
 		Nets net = new Nets();
 		String ret = net.goPost("passport.weibo.com", 443, getHash());
 		if (!MyUtil.isEmpty(ret)) {
-			String tid = MyUtil.midWord("tid\":\"", "\",\"", ret);
+			String tid = MyUtil.midWord("tid\":\"", "\",\"", ret); 
 			String newId = MyUtil.midWord("new_tid\":", "}", ret);
 			newId = newId.indexOf("true") != -1 ? "3" : "2";
 			String con = MyUtil.midWord("confidence\":", "}", ret);

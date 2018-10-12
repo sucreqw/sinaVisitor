@@ -9,7 +9,7 @@ import com.sucre.mainUtil.MyUtil;
 /**
  * 多线程操作网络数据包! 定义为抽象类,方便回调子类的方法
  * 
- * @author sucre
+ * @author sucre..
  *
  */
 abstract public class Thread4Net implements Runnable {
