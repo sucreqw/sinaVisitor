@@ -36,7 +36,7 @@ public class mainFunction extends Thread4Net {
 					if (!MyUtil.isEmpty(ret)) {
 						String uid = MyUtil.midWord("['vid']='", "';", ret);
 						System.out.println( "uid:" + uid);
-						if (!MyUtil.isEmpty(uid)) {
+						if (!MyUtil.isEmpty(uid)&& !uid.equals("null")) {
 							MyUtil.outPutData("key.txt", "null|null|" + SinaUtils.CaculateS(uid) + "|null|null|" + uid
 									+ "|" + MyUtil.midWord("SUB=", ";", cookie) + "|null");
 						}
