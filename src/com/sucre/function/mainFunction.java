@@ -19,9 +19,9 @@ public class mainFunction extends Thread4Net {
 		Nets net = new Nets();
 		String ret = net.goPost("passport.weibo.com", 443, getHash());
 		if (!MyUtil.isEmpty(ret)) {
-			String tid = MyUtil.midWord("tid\":\"", "\",\"", ret); 
+			String tid = MyUtil.midWord("tid\":\"", "\",\"", ret).replace("\\", ""); 
 			String newId = MyUtil.midWord("new_tid\":", "}", ret);
-			newId = newId.indexOf("true") != -1 ? "2" : "3";
+			newId = newId.indexOf("true") != -1 ? "3" : "2";
 			String con = MyUtil.midWord("confidence\":", "}", ret);
 			con = con == null ? "100" : con;
 
@@ -52,7 +52,8 @@ public class mainFunction extends Thread4Net {
 
 	private byte[] getHash() {
 		StringBuilder data = new StringBuilder(900);
-		String temp = "cb=gen_callback&fp=%7B%22os%22%3A%221%22%2C%22browser%22%3A%22Chrome69%2C0%2C3497%2C92%22%2C%22fonts%22%3A%22undefined%22%2C%22screenInfo%22%3A%221920*1080*24%22%2C%22plugins%22%3A%22Portable%20Document%20Format%3A%3Ainternal-pdf-viewer%3A%3AChrome%20PDF%20Plugin%7C%3A%3A"
+		String agent="Chrome/"+ MyUtil.getRand(90, 10)+".0."+ MyUtil.getRand(9999, 1000)+"."+ MyUtil.getRand(100, 10);
+		String temp = "cb=gen_callback&fp=%7B%22os%22%3A%221%22%2C%22browser%22%3A%22"+ URLEncoder.encode(URLEncoder.encode(agent))+"%22%2C%22fonts%22%3A%22undefined%22%2C%22screenInfo%22%3A%22"+ MyUtil.getRand(1980, 1024)+"*"+ MyUtil.getRand(1080, 980)+"*24%22%2C%22plugins%22%3A%22Portable%20Document%20Format%3A%3Ainternal-pdf-viewer%3A%3AChrome%20PDF%20Plugin%7C%3A%3A"
 				+ MyUtil.makeNonce(32)
 				+ "%3A%3AChrome%20PDF%20Viewer%7C%3A%3Ainternal-nacl-plugin%3A%3ANative%20Client%22%7D\r\n";
 		data.append("POST https://passport.weibo.com/visitor/genvisitor HTTP/1.1\r\n");
@@ -63,7 +64,7 @@ public class mainFunction extends Thread4Net {
 		data.append("Origin: https://passport.weibo.com\r\n");
 		data.append("If-Modified-Since: 0\r\n");
 		data.append(
-				"User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.92 Safari/537.36\r\n");
+				"User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "+ agent +" Safari/537.36\r\n");
 		data.append("Content-Type: application/x-www-form-urlencoded\r\n");
 		data.append("Accept: */*\r\n");
 		data.append(
