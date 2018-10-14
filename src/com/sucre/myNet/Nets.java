@@ -65,7 +65,8 @@ public class Nets {
 			out.close();
 
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.err.println(e.getMessage());
 		}
 
 		return ret.toString();
@@ -110,7 +111,7 @@ public class Nets {
 			out.close();
 
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.err.println(e.getMessage());
 		}
 
 		return ret.toString();

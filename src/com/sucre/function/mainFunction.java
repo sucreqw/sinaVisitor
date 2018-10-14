@@ -25,12 +25,12 @@ public class mainFunction extends Thread4Net {
 			String con = MyUtil.midWord("confidence\":", "}", ret);
 			con = con == null ? "100" : con;
 
-			System.out.println(tid + "<>" + newId + "<>" + con);
+			//System.out.println(tid + "<>" + newId + "<>" + con);
 
 			ret = net.goPost("passport.weibo.com", 443, getCookie(tid, newId, con));
 			if (!MyUtil.isEmpty(ret)) {
 				String cookie = MyUtil.getAllCookie(ret);
-				System.out.println("cookie:" + cookie);
+				//System.out.println("cookie:" + cookie);
 				if (!MyUtil.isEmpty(cookie)) {
 					ret = net.goPost("www.weibo.com", 443, getUid(cookie));
 					if (!MyUtil.isEmpty(ret)) {
