@@ -53,9 +53,8 @@ public class mainFunction extends Thread4Net {
 	private byte[] getHash() {
 		StringBuilder data = new StringBuilder(900);
 		String agent="Chrome/"+ MyUtil.getRand(90, 10)+".0."+ MyUtil.getRand(9999, 1000)+"."+ MyUtil.getRand(100, 10);
-		String temp = "cb=gen_callback&fp=%7B%22os%22%3A%221%22%2C%22browser%22%3A%22"+ URLEncoder.encode(URLEncoder.encode(agent))+"%22%2C%22fonts%22%3A%22undefined%22%2C%22screenInfo%22%3A%22"+ MyUtil.getRand(1980, 1024)+"*"+ MyUtil.getRand(1080, 980)+"*24%22%2C%22plugins%22%3A%22Portable%20Document%20Format%3A%3Ainternal-pdf-viewer%3A%3AChrome%20PDF%20Plugin%7C%3A%3A"
-				+ MyUtil.makeNonce(32)
-				+ "%3A%3AChrome%20PDF%20Viewer%7C%3A%3Ainternal-nacl-plugin%3A%3ANative%20Client%22%7D\r\n";
+		String temp = "cb=gen_callback&fp="+ MyUtil.makeNonce(32);
+				
 		data.append("POST https://passport.weibo.com/visitor/genvisitor HTTP/1.1\r\n");
 		data.append("Host: passport.weibo.com\r\n");
 		data.append("Connection: keep-alive\r\n");
