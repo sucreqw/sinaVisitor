@@ -45,8 +45,9 @@ public class mainFunction extends Thread4Net {
 							MyUtil.outPutData("key.txt", "null|null|" + SinaUtils.CaculateS(uid) + "|null|null|" + uid
 									+ "|" + MyUtil.midWord("SUB=", ";", cookie) + "|null");
 						} else {
-							System.out.println("要换ip了！");
+							
 							if (Thread.currentThread().getName().equals("ip")) {
+								System.out.println("要换ip了！");
 								MyUtil.cutAdsl(accounts.getInstance().getADSL());
 								MyUtil.sleeps(1000);
 								MyUtil.connAdsl(accounts.getInstance().getADSL(), accounts.getInstance().getADSLname(),
