@@ -38,9 +38,10 @@ public class mainFunction extends Thread4Net {
 					ret = net.goPost("www.weibo.com", 443, getUid(cookie));
 					if (!MyUtil.isEmpty(ret)) {
 						String uid = MyUtil.midWord("['vid']='", "';", ret);
-						System.out.println("uid:" + uid);
+						
 
 						if (!MyUtil.isEmpty(uid) && !uid.equals("null")) {
+							System.out.println("uid:" + uid);
 							MyUtil.outPutData("key.txt", "null|null|" + SinaUtils.CaculateS(uid) + "|null|null|" + uid
 									+ "|" + MyUtil.midWord("SUB=", ";", cookie) + "|null");
 						} else {
@@ -51,6 +52,7 @@ public class mainFunction extends Thread4Net {
 								MyUtil.connAdsl(accounts.getInstance().getADSL(), accounts.getInstance().getADSLname(),
 										accounts.getInstance().getADSLpass());
 								System.out.println("换完ip了！");
+								MyUtil.sleeps(2000);
 							} else {
 								MyUtil.sleeps(5000);
 							}

@@ -21,7 +21,7 @@ public class weiboVisitor {
 			
 			Thread thread = new Thread(m);
 			if(i==0) {thread.setName("ip");}
-			//thread.start();
+			thread.start();
 		}
 		//System.out.println(SinaUtils.CaculateS("1007523439724"));
 		
