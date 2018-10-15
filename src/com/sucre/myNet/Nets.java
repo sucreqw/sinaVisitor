@@ -64,9 +64,9 @@ public class Nets {
 			sslsocket.close();
 			out.close();
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 			//e.printStackTrace();
-			//System.err.println(e.getMessage());
+			System.err.println("网络错误：" + e.getMessage());
 		}
 
 		return ret.toString();
@@ -110,8 +110,8 @@ public class Nets {
 			socket.close();
 			out.close();
 
-		} catch (IOException e) {
-			System.err.println(e.getMessage());
+		} catch (Exception e) {
+			System.err.println("http网络错误：" + e.getMessage());
 		}
 
 		return ret.toString();

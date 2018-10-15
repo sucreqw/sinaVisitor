@@ -47,7 +47,7 @@ public class MyUtil {
 			list.loadFromFile(fName);
 			return ("导入成功<==>" + String.valueOf(list.getSize()));
 		} catch (IOException e) {
-			return (e.getMessage());
+			return ("导入错误：" + e.getMessage());
 		}
 
 	}
@@ -381,8 +381,8 @@ public class MyUtil {
 		try {
 			Thread.sleep(millis);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("休眠出错：" + e.getMessage());
 		}
 	}
 	
@@ -404,7 +404,8 @@ public class MyUtil {
             sbCmd.append(line + "\n");  
         }  
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("调用出错："+ e.getMessage());
 		}  
         
         
@@ -466,9 +467,9 @@ public class MyUtil {
 			info.setADSLName(properties.getProperty("id"));
 			info.setADSLPass(properties.getProperty("pass"));
 		} catch (FileNotFoundException e) {
-			System.out.println(e.getMessage());
+			System.out.println("导入ip文件错误：" + e.getMessage());
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			System.out.println("导入ip文件错误：" + e.getMessage());
 		}
 		
 	}
