@@ -21,40 +21,40 @@ public class mainFunction extends Thread4Net {
 		Nets net = new Nets();
 		String ret = net.goPost("passport.weibo.com", 443, getHash());
 		if (!MyUtil.isEmpty(ret)) {
-			String tid = MyUtil.midWord("tid\":\"", "\",\"", ret).replace("\\", ""); 
+			String tid = MyUtil.midWord("tid\":\"", "\",\"", ret).replace("\\", "");
 			String newId = MyUtil.midWord("new_tid\":", "}", ret);
 			newId = newId.indexOf("true") != -1 ? "3" : "2";
 			String con = MyUtil.midWord("confidence\":", "}", ret);
 			con = con == null ? "100" : con;
 
-			//System.out.println(tid + "<>" + newId + "<>" + con);
-			//System.out.println(ret);
+			// System.out.println(tid + "<>" + newId + "<>" + con);
+			// System.out.println(ret);
 			ret = net.goPost("passport.weibo.com", 443, getCookie(tid, newId, con));
 			if (!MyUtil.isEmpty(ret)) {
 				String cookie = MyUtil.getAllCookie(ret);
-				//System.out.println(ret);
-				
+				// System.out.println(ret);
+
 				if (!MyUtil.isEmpty(cookie)) {
 					ret = net.goPost("www.weibo.com", 443, getUid(cookie));
 					if (!MyUtil.isEmpty(ret)) {
 						String uid = MyUtil.midWord("['vid']='", "';", ret);
-						System.out.println( "uid:" + uid);
-						
-						if (!MyUtil.isEmpty(uid)&& !uid.equals("null")) {
+						System.out.println("uid:" + uid);
+
+						if (!MyUtil.isEmpty(uid) && !uid.equals("null")) {
 							MyUtil.outPutData("key.txt", "null|null|" + SinaUtils.CaculateS(uid) + "|null|null|" + uid
 									+ "|" + MyUtil.midWord("SUB=", ";", cookie) + "|null");
-						}else {
+						} else {
 							System.out.println("要换ip了！");
 							if (Thread.currentThread().getName().equals("ip")) {
 								MyUtil.cutAdsl(accounts.getInstance().getADSL());
 								MyUtil.sleeps(1000);
-								MyUtil.connAdsl(accounts.getInstance().getADSL(), accounts.getInstance().getADSLname(), accounts.getInstance().getADSLpass());
+								MyUtil.connAdsl(accounts.getInstance().getADSL(), accounts.getInstance().getADSLname(),
+										accounts.getInstance().getADSLpass());
 								System.out.println("换完ip了！");
-							}else {
+							} else {
 								MyUtil.sleeps(5000);
 							}
-								
-							
+
 						}
 					}
 
@@ -68,9 +68,10 @@ public class mainFunction extends Thread4Net {
 
 	private byte[] getHash() {
 		StringBuilder data = new StringBuilder(900);
-		String agent="Chrome/"+ MyUtil.getRand(90, 10)+".0."+ MyUtil.getRand(9999, 1000)+"."+ MyUtil.getRand(100, 10);
-		String temp = "cb=gen_callback&fp="+ MyUtil.makeNonce(32);
-				
+		String agent = "Chrome/" + MyUtil.getRand(90, 10) + ".0." + MyUtil.getRand(9999, 1000) + "."
+				+ MyUtil.getRand(100, 10);
+		String temp = "cb=gen_callback&fp=" + MyUtil.makeNonce(32);
+
 		data.append("POST https://passport.weibo.com/visitor/genvisitor HTTP/1.1\r\n");
 		data.append("Host: passport.weibo.com\r\n");
 		data.append("Connection: keep-alive\r\n");
@@ -78,8 +79,8 @@ public class mainFunction extends Thread4Net {
 		data.append("Cache-Control: max-age=0\r\n");
 		data.append("Origin: https://passport.weibo.com\r\n");
 		data.append("If-Modified-Since: 0\r\n");
-		data.append(
-				"User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "+ agent +" Safari/537.36\r\n");
+		data.append("User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
+				+ agent + " Safari/537.36\r\n");
 		data.append("Content-Type: application/x-www-form-urlencoded\r\n");
 		data.append("Accept: */*\r\n");
 		data.append(
