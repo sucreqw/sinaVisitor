@@ -66,7 +66,7 @@ public class Nets {
 
 		} catch (IOException e) {
 			//e.printStackTrace();
-			System.err.println(e.getMessage());
+			//System.err.println(e.getMessage());
 		}
 
 		return ret.toString();

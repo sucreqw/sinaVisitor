@@ -3,14 +3,18 @@ package com.sucre.mainUtil;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 import java.util.zip.GZIPOutputStream;
 import javax.crypto.Cipher;
@@ -449,4 +453,23 @@ public class MyUtil {
         }  
     }  
 	
+    /**
+     * 导入宽带账号密码名称等信息
+     * @param filename
+     */
+    public static void loadADSL(String filename,Info info) {
+    	Properties properties =new Properties();
+    	
+    	try {
+			properties.load(new FileInputStream(new File(filename)));
+			info.setADSL(properties.getProperty("name"));
+			info.setADSLName(properties.getProperty("id"));
+			info.setADSLPass(properties.getProperty("pass"));
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+		
+	}
 }

@@ -2,10 +2,12 @@ package com.sucre.function;
 
 import java.net.URLEncoder;
 
+import com.sucre.mainUtil.Info;
 import com.sucre.mainUtil.MyUtil;
 import com.sucre.mainUtil.SinaUtils;
 import com.sucre.myNet.Nets;
 import com.sucre.myThread.Thread4Net;
+import com.sucre.properties.accounts;
 
 public class mainFunction extends Thread4Net {
 
@@ -26,19 +28,33 @@ public class mainFunction extends Thread4Net {
 			con = con == null ? "100" : con;
 
 			//System.out.println(tid + "<>" + newId + "<>" + con);
-
+			//System.out.println(ret);
 			ret = net.goPost("passport.weibo.com", 443, getCookie(tid, newId, con));
 			if (!MyUtil.isEmpty(ret)) {
 				String cookie = MyUtil.getAllCookie(ret);
-				//System.out.println("cookie:" + cookie);
+				//System.out.println(ret);
+				
 				if (!MyUtil.isEmpty(cookie)) {
 					ret = net.goPost("www.weibo.com", 443, getUid(cookie));
 					if (!MyUtil.isEmpty(ret)) {
 						String uid = MyUtil.midWord("['vid']='", "';", ret);
 						System.out.println( "uid:" + uid);
+						
 						if (!MyUtil.isEmpty(uid)&& !uid.equals("null")) {
 							MyUtil.outPutData("key.txt", "null|null|" + SinaUtils.CaculateS(uid) + "|null|null|" + uid
 									+ "|" + MyUtil.midWord("SUB=", ";", cookie) + "|null");
+						}else {
+							System.out.println("要换ip了！");
+							if (Thread.currentThread().getName().equals("ip")) {
+								MyUtil.cutAdsl(accounts.getInstance().getADSL());
+								MyUtil.sleeps(1000);
+								MyUtil.connAdsl(accounts.getInstance().getADSL(), accounts.getInstance().getADSLname(), accounts.getInstance().getADSLpass());
+								System.out.println("换完ip了！");
+							}else {
+								MyUtil.sleeps(5000);
+							}
+								
+							
 						}
 					}
 
