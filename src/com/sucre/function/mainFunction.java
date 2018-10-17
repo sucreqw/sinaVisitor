@@ -24,16 +24,16 @@ public class mainFunction extends Thread4Net {
 			String tid = MyUtil.midWord("tid\":\"", "\",\"", ret);
 			if(!MyUtil.isEmpty(tid)) {tid=tid.replace("\\", "");}
 			String newId = MyUtil.midWord("new_tid\":", "}", ret);
-			newId = newId.indexOf("true") != -1 ? "3" : "2";
+			if(!MyUtil.isEmpty(newId)) {newId = newId.indexOf("true") != -1 ? "3" : "2";}
 			String con = MyUtil.midWord("confidence\":", "}", ret);
 			con = con == null ? "100" : con;
 
-			 System.out.println(tid + "<>" + newId + "<>" + con + Thread.currentThread().getName());
+			// System.out.println(tid + "<>" + newId + "<>" + con + Thread.currentThread().getName());
 			// System.out.println(ret);
 			ret = net.goPost("passport.weibo.com", 443, getCookie(tid, newId, con));
 			if (!MyUtil.isEmpty(ret)) {
 				String cookie = MyUtil.getAllCookie(ret);
-			    System.out.println("取到cookie"+ Thread.currentThread().getName());
+			    //System.out.println("取到cookie"+ Thread.currentThread().getName());
 
 				if (!MyUtil.isEmpty(cookie)) {
 					ret = net.goPost("www.weibo.com", 443, getUid(cookie));
@@ -100,6 +100,10 @@ public class mainFunction extends Thread4Net {
 
 	private byte[] getCookie(String tid, String newid, String Con) {
 		StringBuilder data = new StringBuilder(900);
+		tid=tid==null?"":tid;
+		newid=newid==null?"":newid;
+		Con=Con==null?"":Con;
+		
 		data.append("GET https://passport.weibo.com/visitor/visitor?a=incarnate&t=" + URLEncoder.encode(tid) + "&w="
 				+ newid + "&c=" + Con + "&gc=&cb=cross_domain&from=weibo&_rand=0." + MyUtil.makeNumber(17)
 				+ " HTTP/1.1\r\n");
