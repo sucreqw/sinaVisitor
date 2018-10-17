@@ -12,17 +12,17 @@ public class accounts implements Info{
 	}
 	@Override
 	public void setADSL(String adslID) {
-		this.ADSL=adslID;
+		ADSL=adslID;
 		
 	}
 	@Override
 	public void setADSLName(String adslName) {
-		this.ADSLname=adslName;
+		ADSLname=adslName;
 	}
 	@Override
 	public void setADSLPass(String adslPass) {
 		
-		this.ADSLpassword=adslPass;
+		ADSLpassword=adslPass;
 	}
 	@Override
 	public String getADSL() {
